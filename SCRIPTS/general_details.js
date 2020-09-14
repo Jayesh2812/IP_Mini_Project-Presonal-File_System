@@ -16,12 +16,15 @@
 // Table data and respective file objects
 
 let tables = document.querySelectorAll('table')
+// Json objects
 let exp_files = []
 let qual_files = []
 let ex_qual_files = []
+// Files objects
 let exp_data = []
 let qual_data = []
 let ex_qual_data = []
+
 let files_data = [exp_files,qual_files,exp_files ] //Files object array array
 let data = [exp_data,qual_data,ex_qual_data]  
 

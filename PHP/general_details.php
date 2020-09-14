@@ -3,7 +3,7 @@ include "config.php";
 include "login.php";
 // echo $_POST["login"];
 // session_start();
-var_dump($_SESSION["id"]);
+// var_dump($_SESSION["id"]);
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
         // json files
         // $expdata = json_decode($_POST['exp_data']);
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $aadharurl=$_FILES["aadhar_doc"]["name"];
         $joining=$_POST["date_of_joining"];
         $appoint=$_FILES["date_of_joining_doc"]["name"];
-
+        $base_dir = "D:/IP Mini Project - Personal File System/UPLOADS/Papers/";
 
             // Pan url store
     $pan_url_store="C:/Users/computer solution/Desktop/Calculator".$panurl;
@@ -121,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     // _____________________________extra qualification ends__________________________
 
 
-        $sql1="INSERT INTO personal_info(Login, Name, Dob, Email, Pan_No, Pan_Url, Aadhar_No, Aadhar_Url, Joining_Date, Appointment_Letter_Url,Research_Profile_Url,Research_Profile_Url_2,Research_Profile_Url_3,Research_Profile_Url_4) VALUES('";
+    $sql1="INSERT INTO personal_info(Login, Name, Dob, Email, Pan_No, Pan_Url, Aadhar_No, Aadhar_Url, Joining_Date, Appointment_Letter_Url,Research_Profile_Url,Research_Profile_Url_2,Research_Profile_Url_3,Research_Profile_Url_4) VALUES('";
 	$sql1 .= $login ."','" .$name."','" .$date."','" .$email."','" .$panno. "','" .$pan_url_store. "','" .$aadharno. "','" .$aadharurl. "','" .$joining. "','" .$appoint."','" .$research1."','" .$research2."','" .$research3. "','" .$research4. "')";
     if(mysqli_query($conn,$sql1)){
         echo"<script>alert(\"Successfuly Added\")</script>";
@@ -129,24 +129,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     else{
         echo "error occured";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         foreach ($_POST as $key => $value) {
             $value = json_encode($value);
