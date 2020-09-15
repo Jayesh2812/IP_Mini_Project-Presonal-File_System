@@ -1,10 +1,8 @@
 <?php
 include "config.php";
-include "login.php";
-// echo $_POST["login"];
-// session_start();
-// var_dump($_SESSION["id"]);
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
+session_start();
+print_r($_SESSION);
+if ($_SERVER["REQUEST_METHOD"] == "PST"){
         // json files
         // $expdata = json_decode($_POST['exp_data']);
         // $qualdata = json_decode($_POST['qual_data']);
@@ -12,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
         // general details
         // $login=$_POST["login"];
-        $login="44444";
+        $login=$_SESSION['loginID'];
         $name=$_POST["name"];
         $date=$_POST["date_of_birth"];
         $email=$_POST["email"];
@@ -140,9 +138,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             echo "<p><b>$key</b>-:$value</p>";
         }
     }
-
-
-
-
-
-?>

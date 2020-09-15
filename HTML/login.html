@@ -1,33 +1,23 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
-
-   
-    <script defer src="logs.js"></script>
-
-    <link rel="stylesheet" href="../CSS/login.css">
-
+    <script src="../SCRIPTS/login.js"></script>
     <title>Login</title>
 </head>
 <body>
-    <div class="main">
-        <form action="../PHP/login.php" method="POST">
-            <h2>Sign In</h2>
-            <h4>Userid</h4>
-            <input type="text" name="login" id="userid" placeholder="Userid">
-            <h4>Password</h4>
-            <input type="password" name="password" id="password" placeholder="Password">
-            <!-- ss -->
-            <input type="submit" id="submit" value="Log In">
+    <main>
+        <form id="form" method="post">
+            <label for="loginID">Login ID</label>
+            <input type="text" name="loginID" id="loginID">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+            <input type="button" value="Log in" id="submit">
+            <input type="button" value="Log out" id="logout">
         </form>
-    </div>
+    </main>
 </body>
 </html>
-
-
 
 

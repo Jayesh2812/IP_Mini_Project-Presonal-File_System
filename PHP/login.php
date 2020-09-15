@@ -1,43 +1,51 @@
 <?php
 include "config.php";
 session_start();
-// echo "Hello";
-// GLOBAL $result1;
-// GLOBAL $sql1;
-// $logo=$_POST["login"];
-// global $login;
+
+
+
+
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-    // global $login;
-    $login=$_POST["login"];
-    // $_SESSION["id"]=$login;
+    $login=$_POST["loginID"];
     $password=$_POST["password"];
-    // $login="$login";
-    // $password="$password";
-
-
-    $sql="SELECT Login,Password FROM login_and_password where Login='$login' and Password='$password'";
-    $result=mysqli_query($conn,$sql);
-    if (mysqli_num_rows($result) == 0) { 
-        echo '<script> alert("Please check login or password") </script>';
-
+    
+    
+    $sql="SELECT * FROM `login_and_password` WHERE `Login`='$login'";
+    $result = $conn->query($sql);
+    $result= mysqli_fetch_assoc($result);
+    if (count($result) == 0){
+        echo 'Check LoginID';
+        die;
         
-     } 
-     else { 
-         echo '<script> alert("Succesfully Login") </script>'; 
-         $sql1="select * from personal_info where Login='$login'";
-        // $result1;
-         $result1=mysqli_query($conn,$sql1);
-         if (mysqli_num_rows($result1) == 0) { 
-             echo '<script>location.href="../HTML/general details.html"</script>';
-             
-             
-        } 
-        else{
-            // $result1=$result1;
-            echo '<script>location.href="../PHP/modified_gd.php"</script>';
-            // echo  "Jayesh Tu kar";
-          }
     }
+    else{
+        if($result['Password']!=$password){
+            echo "Check password";
+            die;
+        }
+        else{
+            echo 1;
+            $_SESSION["loginID"]=$login;
+            // Storing base dir 
+            $add = split('/',$_SERVER['SCRIPT_FILENAME']);
+            $base_dir="";
+            for ($i=0; $i < count($add) -2 ; $i++) { 
+                $base_dir.=$add[$i].'/';
+            }
+            // create upload and others folders if not alredy present
+            $base_dir.='UPLOADS';
+            if(!is_dir($base_dir)){
+
+                mkdir($base_dir);
+            }
+            $_SESSION['base_dir']  = $base_dir;
+
+        }
+    }
+    
+    // echo  "Jayesh Tu kar";
     
     
     
