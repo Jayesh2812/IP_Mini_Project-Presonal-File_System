@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             echo 1;
             $_SESSION["loginID"]=$login;
             // Storing base dir 
-            $add = split('/',$_SERVER['SCRIPT_FILENAME']);
+            $add = explode('/',$_SERVER['SCRIPT_FILENAME']);
             $base_dir="";
             for ($i=0; $i < count($add) -2 ; $i++) { 
                 $base_dir.=$add[$i].'/';

@@ -18,9 +18,11 @@
         // }
         // Main Code
         // Databse Connection
-
+        session_start();
+        if (!$_SESSION["loginID"]){
+            die;
+        }
         require('config.php');
-
         $data = json_decode($_POST['data']);
         $year = $_POST['year'];
         $dept = $_POST['dept'];
@@ -34,11 +36,17 @@
         $is_hod = $_POST['hod'];
         $received_phd = $_POST['received_phd'] ;
 
-        $loginID = 'Jayesh@2812';
+        $loginID = $_SESSION['loginID'];
 
         // Store Papers
         // PAPERS BASE DIR
-        $paper_dir = "D:/IP Mini Project - Personal File System/UPLOADS/Papers/";
+        $base_dir = $_SESSION['base_dir'];
+        $paper_dir = $base_dir . "/Papers/";
+        print_r($_SESSION);
+        if (!is_dir($paper_dir)){
+            mkdir($paper_dir);
+        }
+
         for ($i=0; $i < count($data); $i++) { 
 
             $key = $data[$i];
@@ -58,7 +66,10 @@
         }
 
         // Academic Year Details
-        $other_dir = "D:/IP Mini Project - Personal File System/UPLOADS/others/";
+        $other_dir = $base_dir . "/academic/";
+        if (!is_dir($other_dir)){
+            mkdir($other_dir);
+        }
         // currently associated
         if($curr_assoc == 'No'){
             $curr_assoc_url = $other_dir . '$_FILES[\'curr_assoc_doc\'][\'name\']';

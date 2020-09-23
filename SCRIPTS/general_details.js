@@ -16,16 +16,16 @@
 // Table data and respective file objects
 
 let tables = document.querySelectorAll('table')
-// Json objects
+// Files objects
 let exp_files = []
 let qual_files = []
 let ex_qual_files = []
-// Files objects
+// Json objects
 let exp_data = []
 let qual_data = []
 let ex_qual_data = []
 
-let files_data = [exp_files,qual_files,exp_files ] //Files object array array
+let files_data = [exp_files,qual_files,ex_qual_files ] //Files object array array
 let data = [exp_data,qual_data,ex_qual_data]  
 
 
@@ -99,7 +99,7 @@ function show(table_no){
 
 form = document.querySelector('form')
 document.addEventListener('keypress',(e)=>{
-    console.log(e.which)
+    // console.log(e.which)
     if(e.which === 13){
         submit()
     }
@@ -128,6 +128,9 @@ function submit(){
         console.log(xmlhttp.status,xmlhttp.readyState)
         if(xmlhttp.status==200 && xmlhttp.readyState==4){
             document.getElementById('info').innerHTML=xmlhttp.responseText
+            if( document.getElementById("name").value == xmlhttp.responseText.split("<br>")[0].trim()) {
+                window.location = "../HTML/academic_details.html"
+            }
         }
     }
     xmlhttp.open("post","../PHP/general_details.php")

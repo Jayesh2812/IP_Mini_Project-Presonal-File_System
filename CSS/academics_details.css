@@ -17,6 +17,7 @@ main{
     border:#303030 solid 2px;
     border-radius:3em;
 }
+
 h1{
     margin:1em 0 ;
     text-transform: uppercase;
@@ -138,7 +139,6 @@ input:focus ,select:focus ,input[type=file]:not(:disabled) +label:focus{
     border:#303030 solid 2px;
     transition:.4s ease-in-out;
     transition-property: background-color color;
-
 }
 .add_row:hover, #submit:hover,.add_row:focus,#submit:focus{
     background: #303030;
