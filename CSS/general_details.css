@@ -50,6 +50,8 @@ select,input{
     border:#3030304b solid 1px;
     border-radius:.5em;
     outline:none;
+    transition:.4s ease;
+
 }
 table{
     border-collapse:collapse;

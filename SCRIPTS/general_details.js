@@ -106,35 +106,74 @@ document.addEventListener('keypress',(e)=>{
 })
 document.getElementById('submit').onclick=submit
 function submit(){
-
+    
     let formdata = new FormData(form)
     // Filling the form objects
-    for (let i = 0; i < exp_files.length; i++) {
-        formdata.append('exp_file'+i,exp_files[i],exp_files[i].name);
-    }
-    for (let i = 0; i < qual_files.length; i++) {
-        formdata.append('qual_file'+i,qual_files[i],qual_files[i].name);
-    }
-    for (let i = 0; i < ex_qual_files.length; i++) {
-        formdata.append('extra_qual_file'+i,ex_qual_files[i],ex_qual_files[i].name);
-    }
-    // Filling the data
-    formdata.append('exp_data',JSON.stringify(exp_data))
-    formdata.append('qual_data',JSON.stringify(qual_data))
-    formdata.append('ex_qual_data',JSON.stringify(ex_qual_data))
+    
+    
+    if (validate(formdata)){
+        for (let i = 0; i < exp_files.length; i++) {
+            formdata.append('exp_file'+i,exp_files[i],exp_files[i].name);
+        }
+        for (let i = 0; i < qual_files.length; i++) {
+            formdata.append('qual_file'+i,qual_files[i],qual_files[i].name);
+        }
+        for (let i = 0; i < ex_qual_files.length; i++) {
+            formdata.append('extra_qual_file'+i,ex_qual_files[i],ex_qual_files[i].name);
+        }
+        // Filling the data
+        formdata.append('exp_data',JSON.stringify(exp_data))
+        formdata.append('qual_data',JSON.stringify(qual_data))
+        formdata.append('ex_qual_data',JSON.stringify(ex_qual_data))
+        console.log(formdata)
+        for (var pair of formdata.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
 
-    let xmlhttp = new XMLHttpRequest()
-    xmlhttp.onreadystatechange = ()=>{
-        console.log(xmlhttp.status,xmlhttp.readyState)
-        if(xmlhttp.status==200 && xmlhttp.readyState==4){
-            document.getElementById('info').innerHTML=xmlhttp.responseText
-            if( document.getElementById("name").value == xmlhttp.responseText.split("<br>")[0].trim()) {
-                window.location = "../HTML/academic_details.html"
+        let xmlhttp = new XMLHttpRequest()
+        xmlhttp.onreadystatechange = ()=>{
+            console.log(xmlhttp.status,xmlhttp.readyState)
+            if(xmlhttp.status==200 && xmlhttp.readyState==4){
+                document.getElementById('info').innerHTML=xmlhttp.responseText
+                if( document.getElementById("name").value == xmlhttp.responseText.split("<br>")[0].trim()) {
+                    window.location = "../HTML/academic_details.html"
+                }
             }
         }
-    }
-    xmlhttp.open("post","../PHP/general_details.php")
+        xmlhttp.open("post","../PHP/general_details.php")
 
-    xmlhttp.send(formdata)
+        xmlhttp.send(formdata)
+    }
+    else{
+        alert("Submission Failed");
+    }
+
+}
+// Form Validation
+validate=(formdata)=>{
+    for (var pair of formdata.entries()) {
+        console.log(`${pair[0]}=> ${pair[1]}`); 
+        let tmp = document.getElementsByName(pair[0])[0];
+        if(tmp.type == "file"){
+            // console.log(tmp.files[0])
+            if(!tmp.files[0]){
+                // console.log(document.getElementsByName(pair[0])[0].files[0])
+                document.querySelector(`[for = "${tmp.id}"`).focus()
+                document.querySelector(`[for = "${tmp.id}"`).style.background ='red'
+                setTimeout(()=>{document.querySelector(`[for = "${tmp.id}"`).removeAttribute('style')},4000)
+                return false
+            }
+
+        }
+        else if(pair[1]==''){
+            // console.log('empty')
+            tmp.focus()
+            tmp.style.background='red'
+            setTimeout(()=>{tmp.removeAttribute("style")},4000)
+            return false
+        }
+        
+    }
+    return true
 
 }
