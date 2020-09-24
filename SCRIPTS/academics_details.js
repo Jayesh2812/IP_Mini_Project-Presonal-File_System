@@ -101,6 +101,8 @@
     document.getElementById('submit').onclick=submit
     function submit(){
         let formdata = new FormData(form)
+        if (validate(formdata)){
+
         formdata.append('data',JSON.stringify(data))
 
         for (let i = 0; i < paper_files.length; i++) {
@@ -117,9 +119,41 @@
         xmlhttp.open("post","../PHP/get_academic_details.php")
 
         xmlhttp.send(formdata)
+    }
+    else{
+        alert("Submission Failed");
+    }
+    
 
         
 
+        
+}
+// Form Validation
+validate=(formdata)=>{
+    for (var pair of formdata.entries()) {
+        console.log(`${pair[0]}=> ${pair[1]}`); 
+        let tmp = document.getElementsByName(pair[0])[0];
+        if(tmp.type == "file"){
+            // console.log(tmp.files[0])
+            if(!tmp.files[0]){
+                document.querySelector(`[for = "${tmp.id}"`).focus()
+    
+    document.querySelector(`[for = "${tmp.id}"`).setAttribute('style','box-shadow:0 0 0 1.5px rgb(255, 94, 0);')
+                setTimeout(()=>{document.querySelector(`[for = "${tmp.id}"`).removeAttribute('style')},4000)
+                return false
+            }
+
+        }
+        else if(pair[1]==''){
+            tmp.focus()
+            tmp.setAttribute('style','box-shadow:0 0 0 1.5px rgb(255, 94, 0);')
+            setTimeout(()=>{tmp.removeAttribute('style')},4000)
+            return false
+        }
         
     }
+    return true
+
+}
 

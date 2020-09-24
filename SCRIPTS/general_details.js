@@ -159,7 +159,7 @@ validate=(formdata)=>{
             if(!tmp.files[0]){
                 // console.log(document.getElementsByName(pair[0])[0].files[0])
                 document.querySelector(`[for = "${tmp.id}"`).focus()
-                document.querySelector(`[for = "${tmp.id}"`).style.background ='red'
+                document.querySelector(`[for = "${tmp.id}"`).setAttribute('style','box-shadow:0 0 0 1.5px rgb(255, 94, 0);')
                 setTimeout(()=>{document.querySelector(`[for = "${tmp.id}"`).removeAttribute('style')},4000)
                 return false
             }
@@ -168,7 +168,7 @@ validate=(formdata)=>{
         else if(pair[1]==''){
             // console.log('empty')
             tmp.focus()
-            tmp.style.background='red'
+            tmp.setAttribute('style','box-shadow:0 0 0 1.5px rgb(255, 94, 0);')
             setTimeout(()=>{tmp.removeAttribute("style")},4000)
             return false
         }

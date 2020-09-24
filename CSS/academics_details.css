@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-family:Raleway;
     /* user-select:none; */
+    
 }
 body{
 
@@ -47,6 +48,7 @@ select,input{
     border:#3030304b solid 1px;
     border-radius:.5em;
     outline:none;
+    transition: .4s ease;;
 }
 
 label[for="paper"] + span{
