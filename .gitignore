@@ -1,4 +1,7 @@
+.vscode
+ASSETS
 UPLOADS
 .gitignore
 demo
 ftp.py
+ftp.txt
