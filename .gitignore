@@ -1,2 +1,4 @@
-/UPLOADS
+UPLOADS
 .gitignore
+demo
+ftp.py
