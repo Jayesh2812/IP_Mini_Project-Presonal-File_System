@@ -1,6 +1,5 @@
 <?php
 include "config.php";
-session_start();
 
 
 
@@ -27,10 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         }
         else{
             echo 1;
+            if( session_start());
             $_SESSION["loginID"]=$login;
             // Storing base dir 
             $add = explode('/',$_SERVER['SCRIPT_FILENAME']);
-
+            
             
             $base_dir="";
             for ($i=0; $i < count($add) -2 ; $i++) { 
