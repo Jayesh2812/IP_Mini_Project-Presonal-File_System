@@ -1,3 +1,12 @@
+// Check Login
+let xml = new XMLHttpRequest()
+xml.open("get","../PHP/checkLogin.php")
+xml.onload =()=>{
+    if (xml.responseText === "1"){
+        window.location = "../HTML/login.html"
+    }
+}
+xml.send()
 // Selected File Names
     file_labels = document.querySelectorAll('.file_label')
     file_labels.forEach(file_label => {

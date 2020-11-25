@@ -2,7 +2,8 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     session_start();
     // print_r($_SESSION);
-    if(!$_SESSION["loginID"]){
+    if(!$_SESSION){
+        echo 1;
         die;
     }
     include "config.php";
@@ -149,7 +150,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         }
 
     // _____________________________extra qualification ends__________________________
-    echo $name;
 
     $sql1="INSERT INTO personal_info(Login, Name, Dob, Email, Pan_No, Pan_Url, Aadhar_No, Aadhar_Url, Joining_Date, Appointment_Letter_Url,Research_Profile_Url,Research_Profile_Url_2,Research_Profile_Url_3,Research_Profile_Url_4) VALUES('";
 	$sql1 .= $login ."','" .$name."','" .$date."','" .$email."','" .$panno. "','" .$pan_url_store. "','" .$aadharno. "','" .$aadharurl. "','" .$joining. "','" .$appoint."','" .$research1."','" .$research2."','" .$research3. "','" .$research4. "')";
@@ -160,13 +160,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         echo "error occured";
     }
 
-        // foreach ($_POST as $key => $value) {
-        //     $value = json_encode($value);
-        //     echo "<p><b>$key</b>-:$value</p>";
-        // }
-        // echo "FILES<br>";
-        // foreach ($_FILES as $key => $value) {
-        //     $value = json_encode($value);
-        //     echo "<p><b>$key</b>-:$value</p>";
-        // }
     }

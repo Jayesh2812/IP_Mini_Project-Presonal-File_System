@@ -19,7 +19,8 @@
         // Main Code
         // Databse Connection
         session_start();
-        if (!$_SESSION["loginID"]){
+        if (!$_SESSION){
+            echo 1;
             die;
         }
         require('config.php');
@@ -42,7 +43,7 @@
         // PAPERS BASE DIR
         $base_dir = $_SESSION['base_dir'];
         $paper_dir = $base_dir . "/Papers/";
-        print_r($_SESSION);
+        // print_r($_SESSION);
         if (!is_dir($paper_dir)){
             mkdir($paper_dir);
         }
@@ -57,12 +58,12 @@
 
 
             if ($conn->query($paper_sql)){
-                echo "Papers Submitted<br>";
+                // echo "Papers Submitted<br>";
             }
             else{
                 echo "Error";
             }
-            echo "$key->title - $key->name_of_journal - $key->impact_factor - $paper_url  <br>";
+            // echo "$key->title - $key->name_of_journal - $key->impact_factor - $paper_url  <br>";
         }
 
         // Academic Year Details
@@ -109,14 +110,14 @@
 
         // var_dump($data[1]);
         if($conn->query($AY_query)){
-            echo "Data Submitted";
+            // echo "Data Submitted";
         }
         else{
             echo "Data not saved";
             echo $conn->error;
         }
         
-        
+        echo 1;
 
        
 

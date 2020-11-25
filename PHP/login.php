@@ -1,23 +1,14 @@
 <?php
 include "config.php";
-
-
-
-
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $login=$_POST["loginID"];
     $password=$_POST["password"];
-    
-    
     $sql="SELECT * FROM `login_and_password` WHERE `Login`='$login'";
     $result = $conn->query($sql);
     $result= mysqli_fetch_assoc($result);
     if (count($result) == 0){
         echo 'Check LoginID';
         die;
-        
     }
     else{
         if($result['Password']!=$password){
