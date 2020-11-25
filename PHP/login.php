@@ -1,5 +1,6 @@
 <?php
 include "config.php";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $login=$_POST["loginID"];
     $password=$_POST["password"];
@@ -17,7 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         }
         else{
             echo 1;
-            if( session_start());
+            if($_SERVER["HTTP_HOST"] == "localhost"){
+                session_start();
+            }
             $_SESSION["loginID"]=$login;
             // Storing base dir 
             $add = explode('/',$_SERVER['SCRIPT_FILENAME']);
