@@ -25,12 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             // Storing base dir 
             $add = explode('/',$_SERVER['SCRIPT_FILENAME']);
             
-            
             $base_dir="";
             for ($i=0; $i < count($add) -2 ; $i++) { 
                 $base_dir.=$add[$i].'/';
             }
             // create upload and others folders if not alredy present
+            // echo $base_dir;
             $base_dir.='UPLOADS';
             if(!is_dir($base_dir)){
 

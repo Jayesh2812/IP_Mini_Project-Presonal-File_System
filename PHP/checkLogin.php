@@ -1,9 +1,9 @@
 <?php
 
 session_start();
-if (!$_SESSION["loginID"]){
-    echo 1;
-}
+// if (!$_SESSION){
+//     echo 1;
+// }
 
 
 ?>

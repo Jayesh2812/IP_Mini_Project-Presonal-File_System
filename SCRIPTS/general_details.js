@@ -3,7 +3,7 @@ let xml = new XMLHttpRequest()
 xml.open("get","../PHP/checkLogin.php")
 xml.onload =()=>{
     if (xml.responseText === "1"){
-        window.location = "../HTML/login.html"
+        // window.location = "../HTML/login.html"
     }
 }
 xml.send()
@@ -96,13 +96,13 @@ function show(table_no){
     table.innerHTML=''
     for(let item =0; item < data[table_no].length; item++){
         row = table.insertRow()
-        row.setAttribute('class','paper_data')
+        row.setAttribute('class','paper_data');
         row.innerHTML = `<td>${item+1}</td>
         <td>${data[table_no][item].name}</td>   
         <td>${data[table_no][item].from}</td>
         <td>${data[table_no][item].to}</td>
         <td><a target="_blank" href="${URL.createObjectURL(files_data[table_no][item])}">View Doc</a>
-        <span onclick="delete_row(${item},${table_no})" class="delete_btn"><i class="fas fa-trash"></i></span></td>`            
+        <span onclick="delete_row(${item},${table_no})" class="delete_btn"><i class="fas fa-trash"></i></span></td>`
     }
 }
 
@@ -140,14 +140,15 @@ function submit(){
         }
 
         let xmlhttp = new XMLHttpRequest()
-        xmlhttp.onreadystatechange = ()=>{
-            console.log(xmlhttp.status,xmlhttp.readyState)
-            if(xmlhttp.status==200 && xmlhttp.readyState==4){
-                document.getElementById('info').innerHTML=xmlhttp.responseText
-                if( document.getElementById("name").value == xmlhttp.responseText.split("<br>")[0].trim()) {
+        xmlhttp.onload = ()=>{
+                // alert(xmlhttp.responseText.trim())
+                if (xmlhttp.responseText.trim() === "1"){
                     window.location = "../HTML/academic_details.html"
                 }
-            }
+                else{
+                    alert(xmlhttp.responseText.trim())
+                }
+            
         }
         xmlhttp.open("post","../PHP/general_details.php")
 

@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $appoint=$_FILES["date_of_joining_doc"]["name"];
         $base_dir = $_SESSION['base_dir'];
 
-        echo $name."<br>";
+        // echo $name."<br>";
         // Pan url store
         $general_docs=$base_dir.'/General Docs/';
         if(!is_dir($general_docs)){
@@ -49,18 +49,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             mkdir($extra_curricular);
         }
     $pan_url_store=$general_docs.$panurl;
-    echo $pan_url_store."<br>";
+    // echo $pan_url_store."<br>";
 
     move_uploaded_file($_FILES['PAN_doc']['tmp_name'],$pan_url_store);
 
     // Aadhar url store
     $aadhar_url_store=$general_docs.$aadharurl;
-    echo $aadhar_url_store."<br>";
+    // echo $aadhar_url_store."<br>";
     move_uploaded_file($_FILES['aadhar_doc']['tmp_name'],$aadhar_url_store);
 
     // appointment url store
     $appointment_url_store=$general_docs.$appoint;
-    echo $appointment_url_store."<br>";
+    // echo $appointment_url_store."<br>";
     move_uploaded_file($_FILES['date_of_joining_doc']['tmp_name'],$appointment_url_store);
 
 
@@ -83,15 +83,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $paper_url = $experience . $key->file;
             $paper_sql = "INSERT INTO `experience`(`Login`, `Organisation_Name`, `From_Date`, `To_Date`, `Releiving_Url`)
                             VALUES ('$login','$key->name','$key->from',' $key->to','$paper_url')";
-                            echo $paper_url."<br>";
+                            // echo $paper_url."<br>";
             move_uploaded_file($_FILES['exp_file'.$i]['tmp_name'],$paper_url);
 
 
             if ($conn->query($paper_sql)){
-                echo "Experience Redorded<br>";
+                // echo "Experience Redorded<br>";
             }
             else{
                 echo "Error";
+                die;
             }
             // echo "$key->title - $key->name_of_journal - $key->impact_factor - $paper_url  <br>";
         }
@@ -112,10 +113,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
         if ($conn->query($paper_sql_qual)){
-            echo "Qualification Recorded<br>";
+            // echo "Qualification Recorded<br>";
         }
         else{
             echo "Error";
+            die;
         }
         // echo "$key->title - $key->name_of_journal - $key->impact_factor - $paper_url  <br>";
     }
@@ -127,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         foreach ($_FILES as $key => $value) {
             # code...
             $value = json_encode($value);
-            echo "<p><b>$key</b>-:$value</p>";
+            // echo "<p><b>$key</b>-:$value</p>";
         }
         for ($i=0; $i < count($exqualdata); $i++) { 
 
@@ -141,10 +143,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
             if ($conn->query($paper_sql_ex)){
-                echo "Extra curricular Redorded<br>";
+                // echo "Extra curricular Redorded<br>";
             }
             else{
                 echo "Error";
+                die;
             }
             // echo "$key->title - $key->name_of_journal - $key->impact_factor - $paper_url  <br>";
         }
@@ -154,10 +157,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $sql1="INSERT INTO personal_info(Login, Name, Dob, Email, Pan_No, Pan_Url, Aadhar_No, Aadhar_Url, Joining_Date, Appointment_Letter_Url,Research_Profile_Url,Research_Profile_Url_2,Research_Profile_Url_3,Research_Profile_Url_4) VALUES('";
 	$sql1 .= $login ."','" .$name."','" .$date."','" .$email."','" .$panno. "','" .$pan_url_store. "','" .$aadharno. "','" .$aadharurl. "','" .$joining. "','" .$appoint."','" .$research1."','" .$research2."','" .$research3. "','" .$research4. "')";
     if(mysqli_query($conn,$sql1)){
-        echo"<script>alert(\"Successfuly Added\")</script>";
+        // echo"<script>alert(\"Successfuly Added\")</script>";
     }
     else{
-        echo "error occured";
+        echo "Error occured please try again";
+        die;
     }
-
+    echo 1;
     }

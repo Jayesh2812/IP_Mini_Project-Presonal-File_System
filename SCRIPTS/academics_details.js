@@ -4,7 +4,7 @@ window.onload = () => {
     xml.open("get","../PHP/checkLogin.php")
     xml.onload =()=>{
         if (xml.responseText === "1"){
-            window.location = "../HTML/login.html"
+            // window.location = "../HTML/login.html"
         }
     }
     xml.send()
